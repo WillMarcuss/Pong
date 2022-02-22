@@ -9,11 +9,12 @@ import java.awt.geom.Rectangle2D;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
     Timer timer = new Timer(5,this);
-    double x=1,y=1,velx=0,vely=0,x2=779,y2=1,velx2=0,vely2=0,ballx=400,bally=400,velballx=1.5,velbally=1.5;
+    double x=1,y=250,velx=0,vely=0,x2=779,y2=250,velx2=0,vely2=0,ballx=400,bally=400,velballx=1.5,velbally=1.5;
     public int bluetally = 0;
     public int redtally = 0;
     JLabel blueScore;
     JLabel redScore;
+    final double startingVelocity = 1.5;
     public Game(JLabel blueScore,JLabel redScore){
         this.redScore = redScore;
         this.blueScore = blueScore;
@@ -40,15 +41,15 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         else if (ballx <=0){
             ballx = 400;
             bally = 400;
-            velballx = -velballx;
             redtally++;
+            velballx = startingVelocity;
             redScore.setText(""+redtally);
         }
         else if(ballx >= 790){
             ballx = 400;
             bally = 400;
-            velballx = -velballx;
             bluetally++;
+            velballx = -startingVelocity;
             blueScore.setText(""+bluetally);
 
         }
@@ -77,7 +78,8 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         col3.setBounds((int)ballx,(int)bally,10,10);
 
         if (col3.intersects(col1)|| col3.intersects(col2)){
-            velballx = -velballx;
+            velballx = -1.1*velballx;
+
         }
 
 
